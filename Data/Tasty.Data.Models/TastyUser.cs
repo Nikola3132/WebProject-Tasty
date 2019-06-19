@@ -8,14 +8,14 @@ namespace Tasty.Data.Models
     using Microsoft.AspNetCore.Identity;
     using Tasty.Data.Common.Models;
 
-    public class TastyUser : IdentityUser, IAuditInfo, IDeletableEntity
+    public class TastyUser : IdentityUser, IAuditInfo, IDeletableEntity, IPersonalUserData
     {
         public TastyUser()
         {
-            Id = Guid.NewGuid().ToString();
-            Roles = new HashSet<IdentityUserRole<string>>();
-            Claims = new HashSet<IdentityUserClaim<string>>();
-            Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Id = Guid.NewGuid().ToString();
+            this.Roles = new HashSet<IdentityUserRole<string>>();
+            this.Claims = new HashSet<IdentityUserClaim<string>>();
+            this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
         // Audit info
@@ -27,6 +27,12 @@ namespace Tasty.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Residence { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
