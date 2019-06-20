@@ -25,22 +25,22 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public override int SaveChanges() => SaveChanges(true);
+        public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            ApplyAuditInfoRules();
+            this.ApplyAuditInfoRules();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
-            SaveChangesAsync(true, cancellationToken);
+            this.SaveChangesAsync(true, cancellationToken);
 
         public override Task<int> SaveChangesAsync(
             bool acceptAllChangesOnSuccess,
             CancellationToken cancellationToken = default)
         {
-            ApplyAuditInfoRules();
+            this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
@@ -105,7 +105,7 @@
 
         private void ApplyAuditInfoRules()
         {
-            var changedEntries = ChangeTracker
+            var changedEntries = this.ChangeTracker
                 .Entries()
                 .Where(e =>
                     e.Entity is IAuditInfo &&

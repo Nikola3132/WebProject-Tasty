@@ -27,9 +27,9 @@
 
         public Task<TEntity> GetByIdWithDeletedAsync(params object[] id)
         {
-            var byIdPredicate = EfExpressionHelper.BuildByIdPredicate<TEntity>(Context, id);
+            var byIdPredicate = EfExpressionHelper.BuildByIdPredicate<TEntity>(this.Context, id);
 
-            return AllWithDeleted().FirstOrDefaultAsync(byIdPredicate);
+            return this.AllWithDeleted().FirstOrDefaultAsync(byIdPredicate);
         }
 
         public void HardDelete(TEntity entity) => base.Delete(entity);
@@ -39,7 +39,7 @@
             entity.IsDeleted = false;
             entity.DeletedOn = null;
 
-            Update(entity);
+            this.Update(entity);
         }
 
         public override void Delete(TEntity entity)
@@ -47,7 +47,7 @@
             entity.IsDeleted = true;
             entity.DeletedOn = DateTime.UtcNow;
 
-            Update(entity);
+            this.Update(entity);
         }
     }
 }

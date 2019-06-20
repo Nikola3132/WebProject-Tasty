@@ -10,19 +10,19 @@
     {
         public DbQueryRunner(TastyDbContext context)
         {
-            Context = context ?? throw new ArgumentNullException(nameof(context));
+            this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public TastyDbContext Context { get; set; }
 
         public Task RunQueryAsync(string query, params object[] parameters)
         {
-            return Context.Database.ExecuteSqlCommandAsync(query, parameters);
+            return this.Context.Database.ExecuteSqlCommandAsync(query, parameters);
         }
 
         public void Dispose()
         {
-            Context?.Dispose();
+            this.Context?.Dispose();
         }
     }
 }
