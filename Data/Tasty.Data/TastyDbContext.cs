@@ -25,6 +25,8 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<UserReservation> UsersReservations { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -93,6 +95,12 @@
                 .HasMany(e => e.Roles)
                 .WithOne()
                 .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserReservation>()
+                .HasOne(r => r.User)
+                .WithOne(u => u.Reservation)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         }

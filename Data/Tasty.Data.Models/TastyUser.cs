@@ -16,6 +16,7 @@ namespace Tasty.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+
         }
 
         // Audit info
@@ -34,10 +35,14 @@ namespace Tasty.Data.Models
 
         public string Residence { get; set; }
 
+        public int? Age { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public UserReservation Reservation { get; set; }
     }
 }

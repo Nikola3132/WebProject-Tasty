@@ -3,6 +3,7 @@
 namespace Tasty.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Identity;
     using Tasty.Data.Common.Models;
@@ -17,9 +18,10 @@ namespace Tasty.Data.Models
         public TastyRole(string name)
             : base(name)
         {
-            Id = Guid.NewGuid().ToString();
+            this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
